@@ -109,7 +109,3 @@ class Window(QMainWindow):
                     f'Используемый объём \n {self.ROM_info[i][2]} \n'
 
         self.ROM_info_button.setText(text)
-
-
-
-

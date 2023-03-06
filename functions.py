@@ -18,7 +18,7 @@ def get_GPU_info():
         GPU_load = f'{int(gpu.load)}%'
 
         # количество использованой видеопамяти
-        memory_used = f'{gpu.memoryUsed} МБ'
+        memory_used = f'{int(gpu.memoryUsed)} МБ'
 
         # количество свободной видеопамяти
         memory_free = f'{int(gpu.memoryFree)} МБ'
@@ -50,7 +50,7 @@ def get_CPU_info():
     # количество ядер
     cores = str(psutil.cpu_count(logical=False))
 
-    return CPU_temp, current, processor_name, percent, logical_cores, cores
+    return processor_name, CPU_temp, current, percent, cores, logical_cores
 
 
 def get_RAM_info():
@@ -67,15 +67,13 @@ def get_RAM_info():
 
 
 def get_ROM_info():
-    disk = {}
+    disk = {}  # словарь с именами дисков
     partitions = psutil.disk_partitions()
     for partition in partitions:
         partition_usage = psutil.disk_usage(partition.mountpoint)
-        disk[
-            f'{partition.device[:2]}'] = f'{get_size(partition_usage.total)}', f'{get_size(partition_usage.used)}', f'{get_size(partition_usage.free)}'
+        disk[f'{partition.device[:2]}'] = (
+            f'{get_size(partition_usage.total)}',  # общий объём диска
+            f'{get_size(partition_usage.free)}',  # свободный объём диска
+            f'{get_size(partition_usage.used)}')  # занятый объём диска
 
     return disk
-
-
-print(get_ROM_info())
-# subprocess.Popen('FanControl\\FanControler\\FanControl.exe')

@@ -130,7 +130,13 @@
       }
     ],
     "CustomSensors": [],
-    "FanCurves": [],
+    "FanCurves": [
+      {
+        "IsHidden": false,
+        "Name": "Flat curve example",
+        "Percent": 50.0
+      }
+    ],
     "FanSensors": [
       {
         "Identifier": "/lpc/nct6793d/fan/0",
